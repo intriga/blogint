@@ -5,12 +5,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Posts</h1>
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">DataTables</li>
+                <li class="breadcrumb-item active">Posts</li>
             </ol>
             </div>
         </div>
@@ -23,7 +23,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <h3 class="card-title">Posts</h3>
+                        <!-- <h3 class="card-title">Posts</h3> -->
+                        <a href="{{ url('admin/post/create') }}" class="btn btn-xs btn-success text-right" title="Details">
+                            <i class="fa fa-lg fas fa-plus"></i>
+                            Create
+                        </a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -43,15 +47,19 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->created_at }}</td>
                                     <td>
-                                        <button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-                                            <i class="fa fa-lg fa-fw fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                                        </button>
-                                        <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                                        </button>
+                                        <form action="{{ url('admin/posts/'.$post->id) }}" method="post">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                            <a href="{{ url('admin/post/' . $post->slug) }}" class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
+                                                <i class="fa fa-lg fa-fw fa-eye"></i>
+                                            </a>
+                                            <a href="{{ url('admin/post/' . $post->id) }}/edit" class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                                            </a>
+                                            <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr> 
                                 @endforeach                               

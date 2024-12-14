@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.post.create');
     }
 
     /**
@@ -31,15 +31,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
+        $post->content = $request->input('content');
+
+        // if ($request->allFiles('image')) {     
+        //     $fileName = $request->file('image')->hashName();
+        //     $path = $request->file('image')->storeAs('images', $fileName, 'public');
+        //     $post["image"] = '/storage/'.$path;
+        // }
+
+        $post->save();
+
+        return redirect('/admin/posts');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        return view('backend.post.show', compact('post'));
     }
 
     /**
@@ -47,7 +61,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::where('id', $id)->first();
+        return view('backend.post.edit', compact('post'));
     }
 
     /**
@@ -55,7 +70,14 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
+        $post->content = $request->input('content');               
+
+        $post->save();
+        return redirect('/admin/posts/');
     }
 
     /**
@@ -63,6 +85,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/admin/posts');
     }
 }

@@ -326,8 +326,8 @@ return [
             'icon' => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'Post',
-            'url' => '/admin/post',
+            'text' => 'Posts',
+            'url' => '/admin/posts',
             'icon' => 'far fa-fw fa-file',
         ],
         // ['header' => 'account_settings'],
