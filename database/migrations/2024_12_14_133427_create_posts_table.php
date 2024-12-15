@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+
+            // relations
+            $table->foreign('category_id')->references('id')->on('categories')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->unsignedBigInteger('category_id')->nullable()->default(NULL);  // Nullable and default to NULL
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id')->nullable()->default(NULL);  // Nullable and default to NULL
+
             $table->text('title', 100);
             $table->text('slug', 100);
             $table->text('content', 100);

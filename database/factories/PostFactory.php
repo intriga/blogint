@@ -25,6 +25,8 @@ class PostFactory extends Factory
             'slug' => Str::slug($title),
             'content' => fake()->sentence(1000),
             'image' => $this->faker->imageUrl($width = 1920, $height = 1080),
+            'category_id' => rand(1, 10), // Assuming you have 10 categories
+            'user_id' => rand(1, 10) // Assuming you have 10 categories
         ];
     }
 }
