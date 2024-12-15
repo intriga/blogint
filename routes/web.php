@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // backend
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,4 +39,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/post/{id}/edit', [PostController::class, 'edit']);
     Route::post('/admin/post/{id}/edit', [PostController::class, 'update']);
     Route::delete('/admin/posts/{id}', [PostController::class, 'destroy']); 
+
+    // Categories
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/admin/category/create', [CategoryController::class, 'create']);
+    Route::post('/admin/category/', [CategoryController::class, 'store']);
+    Route::get('/admin/category/{slug}', [CategoryController::class, 'show']);
+    Route::get('/admin/category/{id}/edit', [CategoryController::class, 'edit']);
+    Route::post('/admin/category/{id}/edit', [CategoryController::class, 'update']);
+    Route::delete('/admin/categories/{id}', [CategoryController::class, 'destroy']); 
 });

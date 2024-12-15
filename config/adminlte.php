@@ -323,12 +323,17 @@ return [
         [
             'text' => 'Dashboard',
             'url' => '/admin',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-tachometer-alt',
         ],
         [
             'text' => 'Posts',
             'url' => '/admin/posts',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-pen',
+        ],
+        [
+            'text' => 'Categories',
+            'url' => '/admin/categories',
+            'icon' => 'fas fa-vector-square',
         ],
         // ['header' => 'account_settings'],
         // [
