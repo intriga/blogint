@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -36,12 +38,13 @@ class PostController extends Controller
         $post->slug = $request->input('slug');
         $post->content = $request->input('content');
 
-        // if ($request->allFiles('image')) {     
-        //     $fileName = $request->file('image')->hashName();
-        //     $path = $request->file('image')->storeAs('images', $fileName, 'public');
-        //     $post["image"] = '/storage/'.$path;
-        // }
+        if ($request->allFiles('image')) {     
+            $fileName = $request->file('image')->hashName();
+            $path = $request->file('image')->storeAs('images', $fileName, 'public');
+            $post["image"] = '/storage/'.$path;
+        }
 
+        // dd($request->all());
         $post->save();
 
         return redirect('/admin/posts');
@@ -74,8 +77,28 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
-        $post->content = $request->input('content');               
+        $post->content = $request->input('content');  
+        
+        $old_image = $post->old_image = $request->input('old_image');
 
+        $image = $request->file('image'); // Access uploaded file
+        // dd($request->all());
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+    
+            // Delete the old image if it exists
+            if (File::exists(public_path($old_image))) {
+                File::delete(public_path($old_image));
+            }
+    
+            $fileName = $image->hashName();
+            $imagePath = '/images/' . $fileName;
+            $image->move(public_path('images'), $fileName);
+    
+            $post->image = $imagePath;
+        }
+
+        //dd($post);
         $post->save();
         return redirect('/admin/posts/');
     }
@@ -86,7 +109,18 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $post = Post::find($id);
-        $post->delete();
+        //$post->delete();
+        if ($post->image) {
+            $imagePath = public_path($post->image); // Get the absolute path to the image
+    
+            if (File::exists($imagePath)) {
+                File::delete($imagePath); // Delete the file using Laravel's File facade
+            }
+    
+            $post->delete();
+        } else {
+            $post->delete();
+        }
         return redirect('/admin/posts');
     }
 }

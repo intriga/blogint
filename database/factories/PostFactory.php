@@ -24,7 +24,7 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => fake()->sentence(1000),
-            // 'image' => $this->faker->imageUrl($width = 1920, $height = 1080),
+            'image' => $this->faker->imageUrl($width = 1920, $height = 1080),
         ];
     }
 }

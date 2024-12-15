@@ -30,9 +30,26 @@
 
                         <form method="post" action="{{ url('/admin/post/') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Title</label>
-                                <input class="form-control title-input" name="title" placeholder="Title">
+
+                            <div class="row">
+                            
+                                <div class="form-group col-6">
+                                    <label for="exampleInputEmail1">Title</label>
+                                    <input class="form-control title-input" name="title" placeholder="Title">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <label for="exampleInputFile">File input</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="image" id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="hidden" class="form-control slug-input" name="slug" placeholder="Slug">
@@ -78,6 +95,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://adminlte.io/themes/v3/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     
     <!-- sumernote -->
     <script>
@@ -108,6 +126,12 @@
         .replace(/^-+/, '') // Remove leading -
         .replace(/-+$/, ''); // Remove trailing -
     }
+    </script>
+
+    <script>
+        $(function () {
+            bsCustomFileInput.init();
+        });
     </script>
 
 @endpush
