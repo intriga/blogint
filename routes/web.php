@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,4 +49,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/category/{id}/edit', [CategoryController::class, 'edit']);
     Route::post('/admin/category/{id}/edit', [CategoryController::class, 'update']);
     Route::delete('/admin/categories/{id}', [CategoryController::class, 'destroy']); 
+
+    // posts
+    Route::get('/admin/users', [UserController::class, 'index'])->name('users');
+    Route::get('/admin/user/create', [UserController::class, 'create']);
+    Route::post('/admin/user/', [UserController::class, 'store']);
+    Route::get('/admin/user/{id}/edit', [UserController::class, 'edit']);
+    Route::post('/admin/user/{id}/edit', [UserController::class, 'update']);
+    Route::delete('/admin/users/{id}', [UserController::class, 'destroy']); 
 });

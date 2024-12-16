@@ -335,6 +335,11 @@ return [
             'url' => '/admin/categories',
             'icon' => 'fas fa-vector-square',
         ],
+        [
+            'text' => 'Users',
+            'url' => '/admin/users',
+            'icon' => 'fas fa-users',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',
