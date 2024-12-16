@@ -327,14 +327,33 @@ return [
         ],
         [
             'text' => 'Posts',
-            'url' => '/admin/posts',
             'icon' => 'fas fa-pen',
+            'submenu' => [
+                [
+                    'text' => 'All Posts',
+                    'url' => '/admin/posts',
+                ],
+                [
+                    'text' => 'Add Post',
+                    'url' => '/admin/post/create',
+                ],
+            ],
         ],
         [
             'text' => 'Categories',
-            'url' => '/admin/categories',
             'icon' => 'fas fa-vector-square',
+            'submenu' => [
+                [
+                    'text' => 'All Categories',
+                    'url' => '/admin/categories',
+                ],
+                [
+                    'text' => 'Add Category',
+                    'url' => '/admin/category/create',
+                ],
+            ],
         ],
+        ['header' => 'Settings'],
         [
             'text' => 'Users',
             'url' => '/admin/users',
@@ -351,44 +370,7 @@ return [
         //     'url' => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
+        
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',
