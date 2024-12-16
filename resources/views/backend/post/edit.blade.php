@@ -33,9 +33,20 @@
 
                         <div class="row">
 
-                            <div class="form-group col-5">
-                                <label for="exampleInputEmail1">Title</label>
-                                <input class="form-control title-input" name="title" value="{{ $post->title }}">
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Title</label>
+                                    <input class="form-control title-input" name="title" value="{{ $post->title }}">
+                                </div>
+
+                                <div class="form-group">
+                                    @foreach ($categories as $category)
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" id="category-{{ $category->id }}" name="category" value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'checked' : '' }}>
+                                            <label for="category-{{ $category->id }}" class="custom-control-label">{{ $category->name }}</label>
+                                        </div>      
+                                    @endforeach                                    
+                                </div>
                             </div>
 
                             <div class="form-group col-5">

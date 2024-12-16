@@ -31,11 +31,13 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example" class="table table-striped text-center" style="width:100%">
+                        <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
+                                    <th>category</th>
+                                    <th>user</th>
                                     <th>Date</th>
                                     <th>Options</th>
                                 </tr>
@@ -45,6 +47,8 @@
                                 <tr>
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
+                                    <td>{{ $post->category->name }}</td>
+                                    <td>{{ $post->user->name }}</td>
                                     <td>{{ $post->created_at }}</td>
                                     <td>
                                         <form action="{{ url('admin/posts/'.$post->id) }}" method="post">
@@ -68,6 +72,8 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
+                                    <th>category</th>
+                                    <th>user</th>
                                     <th>Date</th>
                                     <th>Options</th>
                                 </tr>

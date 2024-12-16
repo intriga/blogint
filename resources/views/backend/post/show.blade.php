@@ -32,7 +32,7 @@
                         <!-- /.mailbox-read-info -->
 
                         <div class="mailbox-read-message text-center">
-                            <img src="{{ asset($post->image) }}" class="img-fluid rounded w-75 p-3">                   
+                            <img src="{{ asset($post->image) }}" class="img-fluid rounded w-50 p-3">                   
                         </div>
                        
                         <!-- /.mailbox-controls -->

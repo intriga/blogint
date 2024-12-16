@@ -36,6 +36,29 @@
                                 <div class="form-group col-6">
                                     <label for="exampleInputEmail1">Title</label>
                                     <input class="form-control title-input" name="title" placeholder="Title">
+
+                                    
+                                    <!-- checkbox -->
+                                     <br>
+                                     <!-- <div class="form-group">
+                                        @foreach ($categories as $category)
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox" id="category-{{ $category->id }}" value="{{ $category->name }}">
+                                                <label for="category-{{ $category->id }}" class="custom-control-label">{{ $category->name }}</label>
+                                            </div>      
+                                        @endforeach                                    
+                                    </div> -->
+
+                                    <div class="form-group">
+                                        @foreach ($categories as $category)
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" type="radio" id="category-{{ $category->id }}" name="category" value="{{ $category->id }}">
+                                                <label for="category-{{ $category->id }}" class="custom-control-label">{{ $category->name }}</label>
+                                            </div>      
+                                        @endforeach                                    
+                                    </div>
+                                    
+
                                 </div>
 
                                 <div class="form-group col-6">

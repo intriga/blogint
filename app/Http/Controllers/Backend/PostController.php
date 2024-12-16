@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
+        $posts = Post::with('category', 'user')->get();
+        // dd($posts);
         return view('backend.post.index', compact('posts'));
     }
 
@@ -25,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('backend.post.create');
+        $categories = Category::get();
+        // dd($categories);
+        return view('backend.post.create', compact('categories'));
     }
 
     /**
@@ -37,6 +42,8 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         $post->content = $request->input('content');
+        $post->category_id = $request->input('category');
+        $post->user_id = Auth::id(); // Associate the post with the currently authenticated user
 
         if ($request->allFiles('image')) {     
             $fileName = $request->file('image')->hashName();
@@ -65,7 +72,9 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::where('id', $id)->first();
-        return view('backend.post.edit', compact('post'));
+        $categories = Category::get();
+        // dd($categories);
+        return view('backend.post.edit', compact('post', 'categories'));
     }
 
     /**
