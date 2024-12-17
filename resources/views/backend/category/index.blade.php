@@ -22,13 +22,15 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    @role('admin')
                     <div class="card-header">
-                        <!-- <h3 class="card-name">Categories</h3> -->
+                        <!-- <h3 class="card-name">Categories</h3> -->                        
                         <a href="{{ url('admin/category/create') }}" class="btn btn-xs btn-success text-right" name="Details">
                             <i class="fa fa-lg fas fa-plus"></i>
                             Create
                         </a>
                     </div>
+                    @endrole
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example" class="table table-striped text-center" style="width:100%">
@@ -37,7 +39,10 @@
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>Date</th>
+                                    
+                                    @role('admin')
                                     <th>Options</th>
+                                    @endrole
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +51,7 @@
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->created_at }}</td>
+                                    @role('admin')
                                     <td>
                                         <form action="{{ url('admin/categories/'.$category->id) }}" method="post">
                                         @csrf
@@ -58,6 +64,7 @@
                                             </button>
                                         </form>
                                     </td>
+                                    @endrole
                                 </tr> 
                                 @endforeach                               
                             </tbody>
@@ -66,7 +73,9 @@
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>Date</th>
+                                    @role('admin')
                                     <th>Options</th>
+                                    @endrole
                                 </tr>
                             </tfoot>
                         </table>

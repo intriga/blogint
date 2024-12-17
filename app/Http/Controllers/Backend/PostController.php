@@ -10,6 +10,9 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+
 
 class PostController extends Controller
 {
@@ -28,6 +31,10 @@ class PostController extends Controller
      */
     public function create()
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
         $categories = Category::get();
         // dd($categories);
         return view('backend.post.create', compact('categories'));
@@ -71,6 +78,11 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
+
         $post = Post::where('id', $id)->first();
         $categories = Category::get();
         // dd($categories);
@@ -82,6 +94,11 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
+        
         $post = Post::find($id);
 
         $post->title = $request->input('title');
@@ -117,6 +134,10 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
         $post = Post::find($id);
         //$post->delete();
         if ($post->image) {

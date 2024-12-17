@@ -9,15 +9,23 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
         $users = User::get();
         // dd($users);
         return view('backend.user.index', compact('users'));
@@ -28,6 +36,10 @@ class UserController extends Controller
      */
     public function create()
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
         return view('backend.user.create');
     }
 
@@ -66,6 +78,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
+
         $user = User::where('id', $id)->first();
         return view('backend.user.edit', compact('user'));
     }
@@ -75,6 +92,10 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
 
         $user = User::find($id); // Find the user to update
         $user->name = $request->input('name');
@@ -96,6 +117,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        // Check if the user is an admin
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
+            throw new HttpException(403, 'You do not have permission to access this resource.');
+        }
+        
         $user = User::find($id);
         $user->delete();
         

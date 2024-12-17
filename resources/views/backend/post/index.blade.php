@@ -22,13 +22,15 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    @role('admin')
                     <div class="card-header">
-                        <!-- <h3 class="card-title">Posts</h3> -->
+                        <!-- <h3 class="card-title">Posts</h3> -->                        
                         <a href="{{ url('admin/post/create') }}" class="btn btn-xs btn-success text-right" title="Details">
                             <i class="fa fa-lg fas fa-plus"></i>
                             Create
-                        </a>
+                        </a>                        
                     </div>
+                    @endrole
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example" class="table table-striped" style="width:100%">
@@ -57,12 +59,14 @@
                                             <a href="{{ url('admin/post/' . $post->slug) }}" class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
                                                 <i class="fa fa-lg fa-fw fa-eye"></i>
                                             </a>
+                                            @role('admin')
                                             <a href="{{ url('admin/post/' . $post->id) }}/edit" class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                                             </a>
                                             <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                                             </button>
+                                            @endrole
                                         </form>
                                     </td>
                                 </tr> 

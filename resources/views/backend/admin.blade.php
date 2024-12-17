@@ -15,6 +15,17 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    @if(auth()->check())
+                        @role('admin')
+                            <p>You have admin access!</p>
+                        @else
+                            <p>You do not have admin access.</p>
+                        @endrole
+                    @else
+                        <p>Please log in to see your access level.</p>
+                    @endif
+
                 </div>
             </div>
         </div>

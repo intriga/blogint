@@ -328,30 +328,12 @@ return [
         [
             'text' => 'Posts',
             'icon' => 'fas fa-pen',
-            'submenu' => [
-                [
-                    'text' => 'All Posts',
-                    'url' => '/admin/posts',
-                ],
-                [
-                    'text' => 'Add Post',
-                    'url' => '/admin/post/create',
-                ],
-            ],
+            'url' => '/admin/posts',
         ],
         [
             'text' => 'Categories',
             'icon' => 'fas fa-vector-square',
-            'submenu' => [
-                [
-                    'text' => 'All Categories',
-                    'url' => '/admin/categories',
-                ],
-                [
-                    'text' => 'Add Category',
-                    'url' => '/admin/category/create',
-                ],
-            ],
+            'url' => '/admin/categories',
         ],
         ['header' => 'Settings'],
         [
